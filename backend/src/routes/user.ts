@@ -2,6 +2,9 @@ import { Router } from "express";
 import z from "zod"
 import userModel from "../schema";
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import { JWT_SECRET } from "../config/config";
+
 
 const User = z.object({
     username : z.string().max(10).min(3),
@@ -10,7 +13,7 @@ const User = z.object({
 
 const userRouter = Router()
 
-userRouter.post("/signin", async (req, res)=> {
+userRouter.post("/signup", async (req, res)=> {
     try {
     const user = User.parse(req.body)
     if (!user){
@@ -33,6 +36,47 @@ userRouter.post("/signin", async (req, res)=> {
     }) } catch {
         res.status(500).json({
             message : 'Server Error'
+        })
+    }
+})
+
+userRouter.post("/signin", async (req, res)=> {
+    try {
+        const username = req.body.username
+        const password = req.body.password 
+
+        const user = await userModel.findOne({
+            username : username
+        })
+        if (typeof user?.password !== "string"){
+            res.status(411).json({
+                message : 'Wrong Input'
+            })
+            return
+        }
+        const verified = await bcrypt.compare(password, user?.password)
+        if (!verified){
+            res.status(411).json({
+                message : 'Wrong Password'
+            })
+        }
+        const token = jwt.sign({
+            id : user._id
+        }, JWT_SECRET )
+
+        if (token){
+            res.status(200).json({
+                message : 'You are signed in',
+                token : token
+            })
+        } else {
+            res.status(403).json({
+                message : 'Sorry couldnt assign you a token'
+            })
+        }
+    } catch {
+        res.status(500).json({
+            message : 'Sorry Something went wrong'
         })
     }
 })

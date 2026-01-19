@@ -7,7 +7,7 @@ mongoose.connect(`mongodb+srv://shivresides:${process.env.DB_PASSWORD}@second-br
 })
 
 const userSchema = new Schema({
-    username : String,
+    username : {type : String, unique : true},
     password : String
 })
 
