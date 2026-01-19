@@ -16,6 +16,7 @@ const userRouter = Router()
 userRouter.post("/signup", async (req, res)=> {
     try {
     const user = User.parse(req.body)
+    console.log(user)
     if (!user){
         return res.status(411).json({
             message : 'Error in Inputs'
@@ -33,11 +34,12 @@ userRouter.post("/signup", async (req, res)=> {
     res.status(200).json({
         message : 'You are signed in',
         userid : userDB._id
-    }) } catch {
+    }) } catch (err) {
+        console.error("SIGNUP ERROR:", err);
         res.status(500).json({
-            message : 'Server Error'
-        })
-    }
+          message: "Server Error",
+        });
+      }
 })
 
 userRouter.post("/signin", async (req, res)=> {
