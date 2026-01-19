@@ -1,9 +1,9 @@
 import { Router } from "express";
 import z from "zod"
-import userModel from "../schema";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { JWT_SECRET } from "../config/config";
+import { userModel } from "../schema/user";
 
 
 const User = z.object({
