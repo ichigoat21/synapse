@@ -1,5 +1,7 @@
 import { Router } from "express";
 import contentModel from "../schema/content";
+import linkModel from "../schema/link";
+import random from "../utils/utils";
 
 const contentRouter = Router()
 
@@ -19,7 +21,7 @@ contentRouter.post("/add", async (req, res)=> {
         message : 'Content Added',
         content
     }) } catch (err) {
-        console.error("SIGNUP ERROR:", err);
+        console.error("POST ERROR:", err);
         res.status(500).json({
           message: "Server Error",
         });
@@ -35,7 +37,7 @@ contentRouter.get("/home", async (req, res)=> {
     res.json({
         content
     }) } catch (err) {
-        console.error("SIGNUP ERROR:", err);
+        console.error("HOME ERROR:", err);
         res.status(500).json({
           message: "Server Error",
         });
@@ -51,11 +53,38 @@ contentRouter.delete("/content/:id", async (req, res)=> {
     res.status(200).json({
         message : 'Item Deleted'
     }) } catch (err) {
-        console.error("SIGNUP ERROR:", err);
+        console.error("DELETE ERROR:", err);
         res.status(500).json({
           message: "Server Error",
         });
       }
+})
+
+contentRouter.post("/share", async (req, res)=> {
+  try {
+  const share = req.body.share
+  if (share){
+    const hash = await linkModel.create({
+      userId : req.id,
+      hash : random(15)
+    })
+    res.json({
+      message : "Shareable link",
+      hash : hash
+    })
+  } else {
+    await linkModel.deleteOne({
+      userId : req.id
+    })
+    res.json({
+      message : "Sharable link updated"
+    })
+  } } catch (err) {
+    console.error("SHARE ERROR:", err);
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 })
 
 
