@@ -2,6 +2,7 @@ import { Router } from "express";
 import contentModel from "../schema/content";
 import linkModel from "../schema/link";
 import random from "../utils/utils";
+import { userModel } from "../schema/user";
 
 const contentRouter = Router()
 
@@ -87,5 +88,29 @@ contentRouter.post("/share", async (req, res)=> {
   }
 })
 
+contentRouter.get("/:sharelink", async (req,res)=> {
+  try {
+  const hash = req.params.sharelink
+  console.log(hash)
+  const link = await linkModel.findOne({
+    hash
+  })
+  console.log("link:", link)
+  const content = await contentModel.find({
+    userId : link?.userId
+  })
+  const user = await userModel.findOne({
+    _id : link?.userId
+  })
+  res.status(200).json({
+    username : user?.username,
+    content : content
+  }) } catch (err) {
+    console.error("FIND ERROR:", err);
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+})
 
 export default contentRouter
