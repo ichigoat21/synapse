@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Button } from "./components/Button"
 import Card from "./components/Card"
 import { Modal } from "./components/modal"
@@ -5,8 +6,14 @@ import PlusIcon from "./icons/plusicon"
 import { ShareIcon } from "./icons/shareicon"
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(true)
+
+  function modalHandler(){
+    setModalOpen(!modalOpen)
+  }
   return <div className="w-screen h-screen bg-bgwhite">
-    <Modal open={true}/>
+    <Button onclick={()=>{modalHandler()}} variant="primary" size="md" text="Add Content"/>
+    <Modal onClose={modalHandler} open={modalOpen}/>
   </div>
 }
 
