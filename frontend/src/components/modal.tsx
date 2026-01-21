@@ -9,7 +9,7 @@ interface modalProps {
 
 export function Modal({open, onClose} : modalProps){
     return <div>
-        {open && <div className="h-screen w-screen bg-slate-500/60  flex justify-center fixed">
+        {open && <div className="h-screen w-screen bg-slate-500/60 top-0 left-0  flex justify-center fixed">
             <div className="flex flex-col justify-center">
               <span className="bg-white opacity-100 px-8 rounded-md flex flex-col justify-between items-center">
                 <div className="flex items-center px-4 py-3 w-full justify-between">

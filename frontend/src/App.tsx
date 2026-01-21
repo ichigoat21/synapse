@@ -11,7 +11,7 @@ function App() {
   function modalHandler(){
     setModalOpen(!modalOpen)
   }
-  return <div className="w-screen h-screen bg-bgwhite">
+  return <div className="inset-0 h-screen bg-bgwhite">
     <Button onclick={()=>{modalHandler()}} variant="primary" size="md" text="Add Content"/>
     <Modal onClose={modalHandler} open={modalOpen}/>
   </div>
