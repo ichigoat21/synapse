@@ -38,7 +38,9 @@ export default function Card({title, link, type} : cardProps){
        {/*EMBED*/}
        <div className="px-4 py-2">
         {type === "Youtube" && <iframe className="w-full h-64"  src={ytLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
-       {type ==="Twitter" && <blockquote className="twitter-tweet max-h-20"><p lang="en" dir="ltr">the version of you that wins everything just woke up <a href="https://t.co/Q6cwNIkAqh">pic.twitter.com/Q6cwNIkAqh</a></p>&mdash; @tomkruise (@tom777kruise) <a href={link}>January 20, 2026</a></blockquote>}
+       {type ==="Twitter" && <blockquote className="twitter-tweet">
+         <a href={link.replace("x.com","twitter.com")}></a> 
+       </blockquote>}
        </div>
        {/*FOOTER*/}
 
