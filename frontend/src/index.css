@@ -1,11 +1,9 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+
 
 @theme {
   --color-darkblue : #5245e6;
   --color-lightblue : #e0e9ff;
   --color-textblue : #7470cf;
   --color-bgwhite : #f7fafc;
-
-  --font-Arimo : "Arimo", sans-serif;
 }
