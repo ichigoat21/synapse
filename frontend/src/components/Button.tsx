@@ -16,9 +16,9 @@ const variantStyle = {
 const defaultStyle = "cursor-pointer rounded-md"
 
 const sizeStyles = {
-    "sm" : "px-2 py-1",
-    "md" : "px-4 py-2 w-40 h-12 ",
-    "lg" : "px-6 py-3"
+    "sm" : "px-2 py-1 text-xs sm:text-sm",
+    "md" : "px-3 py-2 sm:px-4 sm:py-2 w-32 sm:w-40 h-10 sm:h-12 text-sm sm:text-base",
+    "lg" : "px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg"
 }
 
 export function Button (props : buttonProps) {

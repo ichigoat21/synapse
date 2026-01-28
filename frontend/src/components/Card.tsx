@@ -23,29 +23,54 @@ export default function Card({title, link, type} : cardProps){
 
     const ytLink = getYouTubeEmbedUrl(link)
       
-    return <div className="flex flex-col justify-center items-center bg-white border border-gray-200 rounded-md max-w-88">
+    // 📱 RESPONSIVE CARD
+    // max-w-full on mobile, max-w-88 on larger screens
+    return <div className="flex flex-col bg-white border border-gray-200 rounded-md w-full max-w-full sm:max-w-88 overflow-hidden">
         {/*HEADER*/}
-       <div className="flex items-center justify-between w-4/5 py-4">
-        <div className="flex items-center gap-2">
-            <PlayIcon/>
-           <p className="font-medium">{title}</p> 
+       <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 border-b border-gray-100">
+        <div className="flex items-center gap-1 sm:gap-2 flex-1 min-w-0">
+            <div className="scale-75 sm:scale-100 flex-shrink-0">
+                <PlayIcon/>
+            </div>
+           <p className="font-medium text-sm sm:text-base truncate">{title}</p> 
         </div>
-        <div className="flex items-center gap-2">
-            <DeleteIcon/>
-            <ShareIcon/>
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            <div className="scale-75 sm:scale-100">
+                <DeleteIcon/>
+            </div>
+            <div className="scale-75 sm:scale-100">
+                <ShareIcon/>
+            </div>
         </div>
        </div>
        {/*EMBED*/}
-       <div className="px-4 py-2">
-        {type === "Youtube" && <iframe className="w-full h-64"  src={ytLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
-       {type ==="Twitter" && <blockquote className="twitter-tweet">
-         <a href={link.replace("x.com","twitter.com")}></a> 
-       </blockquote>}
+       {/* 📱 YouTube: 16:9 aspect ratio, Twitter: controlled height with scroll */}
+       <div className="w-full">
+        {type === "Youtube" && (
+            <div className="relative w-full bg-black" style={{paddingBottom: '56.25%'}}>
+                <iframe 
+                    className="absolute top-0 left-0 w-full h-full"  
+                    src={ytLink} 
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerPolicy="strict-origin-when-cross-origin" 
+                    allowFullScreen
+                ></iframe>
+            </div>
+        )}
+       {type ==="Twitter" && (
+           <div className="w-full h-80 sm:h-96 overflow-y-auto overflow-x-hidden">
+               <blockquote className="twitter-tweet">
+                   <a href={link.replace("x.com","twitter.com")}></a> 
+               </blockquote>
+           </div>
+       )}
        </div>
        {/*FOOTER*/}
 
-       <div className="pt-6">
-        <p className="font-light text-sm">{Date.now()}</p>
+       <div className="px-3 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
+        <p className="font-light text-xs sm:text-sm text-gray-500">{Date.now()}</p>
        </div>
     </div>
 }
