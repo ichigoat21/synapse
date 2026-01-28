@@ -1,19 +1,43 @@
 import { MainIcon } from "../icons/brainly";
 import { TwTicon } from "../icons/twitter";
 import { YTicon } from "../icons/youtube";
-import {  SideListComponent } from "./SIdeList";
+import { SideListComponent } from "./SIdeList";
 
-export function Sidebar(){
-    return <div className="hidden md:block h-screen w-64 lg:w-88 bg-white fixed left-0 top-0 shadow-lg border-r border-gray-200 z-40">
-        <div className="flex items-center px-8 lg:px-15 py-6 lg:py-8 justify-center gap-2 lg:gap-3">
-            <div className="scale-75 lg:scale-100">
-                <MainIcon/>
-            </div>
-            <p className="text-2xl lg:text-4xl">Synapse</p>
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
+  return (
+    <>
+      {/* Backdrop (mobile only) */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <div
+        className={`
+          fixed top-0 left-0 z-40 h-screen w-64 lg:w-88
+          bg-white border-r border-gray-200 shadow-lg
+          transform transition-transform duration-300
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
+        `}
+      >
+        <div className="hidden md:flex items-center px-8 py-6 justify-center gap-3">
+          <MainIcon /> 
+          <p className="text-2xl lg:text-4xl">Synapse</p>
         </div>
-        <div>
-            <SideListComponent icon={<YTicon/>} text="Youtube"/>
-            <SideListComponent icon={<TwTicon/>} text="Twitter"/>
+
+        <div className="py-20 md:py-0">
+          <SideListComponent icon={<YTicon />} text="Youtube" />
+          <SideListComponent icon={<TwTicon />} text="Twitter" />
         </div>
-    </div>
+      </div>
+    </>
+  );
 }
