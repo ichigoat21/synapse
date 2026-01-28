@@ -25,7 +25,7 @@ function App() {
   flex items-center justify-between px-4 z-50">
 
   <button
-    onClick={() => setSidebarOpen(true)}
+    onClick={() => setSidebarOpen(!sidebarOpen)}
     className="p-2 rounded-lg hover:bg-gray-100 transition"
   >
     <MenuIcon />
@@ -51,9 +51,12 @@ function App() {
       {/* Main content */}
       <div className="md:ml-64 lg:ml-92 pt-14 md:pt-0">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-8 md:p-12">
-          <p className="text-xl sm:text-2xl font-bold">All Notes</p>
+          <div className="w-full flex justify-center">
+           <p className="text-xl sm:text-2xl font-bold ">All Notes</p>
+          </div>
+          
 
-          <div className="flex gap-3 w-full sm:w-auto">
+          <div className="flex justify-center gap-3 w-full sm:w-auto">
             <Button
               onclick={modalHandler}
               variant="secondary"
