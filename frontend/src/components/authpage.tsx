@@ -1,12 +1,32 @@
 import { Button } from "./Button"
 import { Input } from "./Input"
 import { MainIcon } from "../icons/brainly"
+import { useRef } from "react"
+import axios from "axios"
+import { HTTP_BACKEND } from "../backendUrl/config"
+import { useNavigate } from "react-router-dom"
 
 interface authProps {
     isSignin? : Boolean
 }
 
 export function AuthPage({isSignin} : authProps){
+    const usernameRef = useRef<HTMLInputElement>()
+    const passwordRef = useRef<HTMLInputElement>()
+    const navigate = useNavigate()
+
+    async function sendCredentials (){
+        const username = usernameRef.current.value;
+        const password = passwordRef.current.value;
+
+        const response = await axios.post(`${HTTP_BACKEND}/users/signup`, {
+            username,
+            password
+        })
+        if(response.data.message === "You are signed in"){
+            navigate("/signin")
+        }
+    }
     return <div className="flex  justify-center items-center h-screen">
         <div className="px-4 py-16 flex flex-col justify-center gap-6 border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-gray-300">
         <div className="flex justify-center items-center">
@@ -21,11 +41,11 @@ export function AuthPage({isSignin} : authProps){
         </p>
         </div>
         <div className="flex flex-col gap-4">
-            <Input size="md" placeholder="Username"/>
-            <Input size="md" placeholder="Password"/>
+            <Input reference={usernameRef} size="md" placeholder="Username"/>
+            <Input reference={passwordRef} size="md" placeholder="Password"/>
         </div>
         <div className="flex justify-center">
-            <Button variant="primary" size="md" text={isSignin ? "Sign In" : "Sign Up"} manualStyle="w-full"/>
+            <Button onclick={sendCredentials} variant="primary" size="md" text={isSignin ? "Sign In" : "Sign Up"} manualStyle="w-full"/>
         </div>
         </div>
     </div>
