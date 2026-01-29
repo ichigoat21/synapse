@@ -19,8 +19,8 @@ export function Modal({open, onClose} : modalProps){
                 </div>
                 </div>
                 <div className="p-4 sm:p-6 flex flex-col gap-2 w-full">
-                <Input placeholder="title"/>
-                <Input placeholder="link"/>
+                <Input size="md" placeholder="title"/>
+                <Input size="md" placeholder="link"/>
                 </div>
                 <div className="flex flex-col sm:flex-row py-2 gap-2 w-full px-4 sm:px-0 sm:w-auto">
                     <Button variant="primary" size="sm" text="Youtube"/>
