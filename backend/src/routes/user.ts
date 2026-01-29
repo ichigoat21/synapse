@@ -32,7 +32,7 @@ userRouter.post("/signup", async (req, res)=> {
         password : hashedPassword
     })
     res.status(200).json({
-        message : 'You are signed in',
+        message : 'You are signed up',
         userid : userDB._id
     }) } catch (err) {
         console.error("SIGNUP ERROR:", err);

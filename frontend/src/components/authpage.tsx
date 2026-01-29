@@ -19,13 +19,26 @@ export function AuthPage({isSignin} : authProps){
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        const response = await axios.post(`${HTTP_BACKEND}/users/signup`, {
-            username,
-            password
-        })
-        if(response.data.message === "You are signed in"){
-            navigate("/signin")
+        if (!isSignin){
+            const response = await axios.post(`${HTTP_BACKEND}/users/signup`, {
+                username,
+                password
+            })
+            if(response.data.message === "You are signed up"){
+                navigate("/signin")
+            }
+        } else {
+            const response = await axios.post(`${HTTP_BACKEND}/users/signin`, {
+                username,
+                password
+            })
+            if(response.data.message === "You are signed in"){
+                const token = response.data.token
+                localStorage.setItem("token", token)
+                navigate("/dashboard")
+            }
         }
+       
     }
     return <div className="flex  justify-center items-center h-screen">
         <div className="px-4 py-16 flex flex-col justify-center gap-6 border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-gray-300">

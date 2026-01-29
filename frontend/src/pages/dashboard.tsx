@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { MenuIcon } from "../icons/menuicon"
 import { MainIcon } from "../icons/brainly"
 import { Sidebar } from "../components/Sidebar"
@@ -11,6 +11,7 @@ import { Modal } from "../components/modal"
 export function Dashboard(){
     const [modalOpen, setModalOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
   
     function modalHandler() {
       setModalOpen(!modalOpen)
