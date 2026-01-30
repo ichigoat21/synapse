@@ -66,7 +66,7 @@ export function Dashboard(){
             { headers : { Authorization : localStorage.getItem("token") } }
         )
         const hash = response.data.hash
-        setShareLink(`http://localhost:5173/${hash}`)
+        setShareLink(`https://synapse-5z35.vercel.app/${hash}`)
         setShareModalOpen(true)
     }
   
