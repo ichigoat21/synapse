@@ -3,6 +3,7 @@ import { AuthPage } from "./components/authpage"
 import { SignIn } from "./pages/signin"
 import { SignUp } from "./pages/signup"
 import { Dashboard } from "./pages/dashboard"
+import { ShareBoard } from "./pages/share"
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
               <Route path="/signup" element={<SignUp/>}></Route>
               <Route path="/signin" element={<SignIn/>}></Route>
               <Route path="/dashboard" element={<Dashboard/>}></Route>
+              <Route path="/:id" element={<ShareBoard/>}></Route>
             </Routes>
         </BrowserRouter>
 }

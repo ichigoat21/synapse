@@ -7,10 +7,10 @@ import { useParams } from "react-router-dom";
 
 export function ShareBoard(){
     const [content, setContent] = useState([]);
-    const id = useParams<{id : string}>()
+    const {id} = useParams<{id : string}>()
 
     async function fetchContent(){
-        const response = await axios.get(`${HTTP_BACKEND}/contents/${id}`)
+        const response = await axios.get(`${HTTP_BACKEND}/share/${id}`)
         setContent(response.data.content)
     }
     useEffect(() => {
