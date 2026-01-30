@@ -4,13 +4,14 @@ import { UserMiddleware } from "./routes/middleware"
 import contentRouter from "./routes/content"
 import mongoose from "mongoose"
 import { MONGO_URL } from "./db"
-
+import cors from "cors"
 
 
 
 const PORT = 3000
 const app = express()
 app.use(express.json())
+app.use(cors())
 app.use("/users", userRouter)
 app.use("/contents", UserMiddleware, contentRouter)
 

@@ -9,6 +9,9 @@ const sizeStyles = {
     "default" :"w-10 h-10 pt-1"
 }
 
+
 export function MainIcon({size} : MainiconProps){
-    return <img className={`${sizeStyles[size]}`} src={brainIcon} alt="brain-icon" />
+
+const classes = sizeStyles[size] ?? sizeStyles.default
+    return <img className={classes} src={brainIcon} alt="brain-icon" />
 }
