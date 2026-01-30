@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { AuthPage } from "./components/authpage"
 import { SignIn } from "./pages/signin"
 import { SignUp } from "./pages/signup"
 import { Dashboard } from "./pages/dashboard"

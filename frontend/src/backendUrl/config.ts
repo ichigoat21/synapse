@@ -1,1 +1,1 @@
-export const HTTP_BACKEND = "http://localhost:3000"
+export const HTTP_BACKEND = "https://synapse-3.onrender.com"

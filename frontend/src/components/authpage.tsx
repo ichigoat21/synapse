@@ -14,7 +14,7 @@ export function AuthPage({isSignin} : authProps){
     const usernameRef = useRef<HTMLInputElement| null>(null)
     const passwordRef = useRef<HTMLInputElement| null>(null)
     const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
+   
 
     const navigate = useNavigate()
 
@@ -27,7 +27,6 @@ export function AuthPage({isSignin} : authProps){
           return;
         }
       
-        setLoading(true);
         setError(null);
       
         try {
@@ -53,9 +52,7 @@ export function AuthPage({isSignin} : authProps){
           } else {
             setError("Unexpected error occurred");
           }
-        } finally {
-          setLoading(false);
-        }
+        } 
       }
       
     
