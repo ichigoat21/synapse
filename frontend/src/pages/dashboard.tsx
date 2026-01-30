@@ -9,6 +9,7 @@ import Card from "../components/Card"
 import { Modal } from "../components/modal"
 import axios from "axios"
 import { HTTP_BACKEND } from "../backendUrl/config"
+import { ShareModal } from "../components/shareModal"
 
 type Content = {
     _id: string;
@@ -22,6 +23,8 @@ export function Dashboard(){
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [content, setContent] = useState<Content[]>([])
     const [filteredContent, setFilteredContent] = useState<Content[]>([])
+    const [shareModalOpen, setShareModalOpen] = useState(false)
+    const [shareLink, setShareLink] = useState("")
 
     useEffect(() => {
         async function fetchData() {
@@ -56,17 +59,15 @@ export function Dashboard(){
         setModalOpen(!modalOpen)
       }
 
-    async function shareHandler(){
+      async function shareHandler(){
         const share = true
-        const response = await axios.post(`${HTTP_BACKEND}/contents/share`, {
-            share
-        }, {
-            headers : {
-                Authorization : localStorage.getItem("token")
-            }
-        })
+        const response = await axios.post(`${HTTP_BACKEND}/contents/share`, 
+            { share }, 
+            { headers : { Authorization : localStorage.getItem("token") } }
+        )
         const hash = response.data.hash
-        alert(`http://localhost:5173/${hash}`)
+        setShareLink(`http://localhost:5173/${hash}`)
+        setShareModalOpen(true)
     }
   
     return (
@@ -145,6 +146,11 @@ export function Dashboard(){
         </div>
   
         <Modal onClose={modalHandler} open={modalOpen} />
+        <ShareModal 
+          isOpen={shareModalOpen} 
+          onClose={() => setShareModalOpen(false)} 
+          shareLink={shareLink} 
+        />
       </div>
     )
 }
