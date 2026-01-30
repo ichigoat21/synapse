@@ -16,7 +16,7 @@ const variantStyle = {
 const defaultStyle = "cursor-pointer rounded-md"
 
 const sizeStyles = {
-    "sm" : "px-2 py-1 text-xs sm:text-sm",
+    "sm" : "px-2 py-2 text-xs sm:text-sm",
     "md" : "px-3 py-2 sm:px-4 sm:py-2 w-32 sm:w-40 h-10 sm:h-12 text-sm sm:text-base",
     "lg" : "px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg"
 }
