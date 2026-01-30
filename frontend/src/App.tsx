@@ -8,6 +8,7 @@ import { ShareBoard } from "./pages/share"
 function App() {
   return <BrowserRouter>
             <Routes>
+              <Route path="/" element={<SignUp/>}></Route>
               <Route path="/signup" element={<SignUp/>}></Route>
               <Route path="/signin" element={<SignIn/>}></Route>
               <Route path="/dashboard" element={<Dashboard/>}></Route>
