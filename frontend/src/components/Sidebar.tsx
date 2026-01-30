@@ -5,7 +5,7 @@ import { SideListComponent } from "./SIdeList";
 
 interface SidebarProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
@@ -29,7 +29,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         `}
       >
         <div className="hidden md:flex items-center px-8 py-6 justify-center gap-3">
-          <MainIcon /> 
+          <MainIcon size="default" /> 
           <p className="text-2xl lg:text-4xl">Synapse</p>
         </div>
 
