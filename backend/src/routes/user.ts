@@ -37,7 +37,7 @@ userRouter.post("/signup", async (req, res)=> {
     }) } catch (err) {
         console.error("SIGNUP ERROR:", err);
         res.status(500).json({
-          message: "Server Error",
+          message: "Username taken or Password too short",
         });
       }
 })

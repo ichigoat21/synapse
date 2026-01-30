@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { MenuIcon } from "../icons/menuicon"
 import { MainIcon } from "../icons/brainly"
 import { Sidebar } from "../components/Sidebar"
