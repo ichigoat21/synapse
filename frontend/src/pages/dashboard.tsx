@@ -36,7 +36,7 @@ export function Dashboard(){
     }, [modalOpen])
 
     async function deleteHandler(id : string){
-        const response = await axios.delete(`${HTTP_BACKEND}/contents/content/${id}`, {
+      await axios.delete(`${HTTP_BACKEND}/contents/content/${id}`, {
             headers : {
                 Authorization : localStorage.getItem("token")
             }
@@ -46,6 +46,19 @@ export function Dashboard(){
   
     function modalHandler() {
       setModalOpen(!modalOpen)
+    }
+
+    async function shareHandler(){
+        const share = true
+        const response = await axios.post(`${HTTP_BACKEND}/contents/share`, {
+            share
+        }, {
+            headers : {
+                Authorization : localStorage.getItem("token")
+            }
+        })
+        const hash = response.data.hash
+        alert(`http://localhost:5173/${hash}`)
     }
   
     return (
@@ -90,7 +103,7 @@ export function Dashboard(){
   
             <div className="flex justify-center gap-3 w-full sm:w-auto">
               <Button
-                onclick={modalHandler}
+                onclick={shareHandler}
                 variant="secondary"
                 size="md"
                 text="Share Brain"

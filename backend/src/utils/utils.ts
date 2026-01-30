@@ -3,7 +3,7 @@ export default function random(len : number){
     const length = str.length
     let opt = ""
     for (let i = 0; i < len; i++){
-        opt += str[Math.floor(Math.random()) * length]
+        opt += str[Math.floor(Math.random() * length)]
     }
     return opt
 }
