@@ -31,7 +31,7 @@ export function Modal({open, onClose} : modalProps){
                 Authorization : localStorage.getItem("token")
             }
         })
-        onClose
+        onClose?.()
     }
     return <div>
         {open && <div className="h-screen w-screen bg-slate-500/60 top-0 left-0 flex justify-center items-center fixed z-50 px-4">

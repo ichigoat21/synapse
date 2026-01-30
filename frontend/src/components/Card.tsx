@@ -6,9 +6,10 @@ interface CardProps {
   title: string;
   link: string;
   type: "Youtube" | "Twitter";
+  onDelete: any
 }
 
-export default function Card({ title, link, type }: CardProps) {
+export default function Card({ title, link, type, onDelete }: CardProps) {
   function getYouTubeEmbedUrl(url: string) {
     try {
       const u = new URL(url);
@@ -62,7 +63,7 @@ export default function Card({ title, link, type }: CardProps) {
             className="p-1.5 rounded-full hover:bg-gray-200/70 transition-colors"
             aria-label="Delete"
           >
-            <div className="w-4 h-4 text-gray-600 hover:text-red-600">
+            <div onClick={onDelete} className="w-4 h-4 text-gray-600 hover:text-red-600">
               <DeleteIcon />
             </div>
           </button>

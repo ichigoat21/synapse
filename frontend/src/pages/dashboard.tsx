@@ -35,6 +35,14 @@ export function Dashboard(){
         fetchData()
     }, [modalOpen])
 
+    async function deleteHandler(id : string){
+        const response = await axios.delete(`${HTTP_BACKEND}/contents/content/${id}`, {
+            headers : {
+                Authorization : localStorage.getItem("token")
+            }
+        })
+        setContent((item)=> item.filter((c)=> c._id !== id))
+    }
   
     function modalHandler() {
       setModalOpen(!modalOpen)
@@ -105,6 +113,9 @@ export function Dashboard(){
                 title={title}
                 link={link}
                 type={type}
+                onDelete={()=> {
+                    deleteHandler(_id)
+                }}
               />
             )) }
           </div>
