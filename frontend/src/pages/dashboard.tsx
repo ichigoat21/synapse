@@ -21,32 +21,40 @@ export function Dashboard(){
     const [modalOpen, setModalOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [content, setContent] = useState<Content[]>([])
+    const [filteredContent, setFilteredContent] = useState<Content[]>([])
 
-    useEffect(()=> {
-        async function fetchData(){
-           const response =  await axios.get(`${HTTP_BACKEND}/contents/home`, {
-                headers : {
-                    Authorization : localStorage.getItem("token")
-                }
-            })
+    useEffect(() => {
+        async function fetchData() {
+            const response = await axios.get(`${HTTP_BACKEND}/contents/home`, {
+                headers: { Authorization: localStorage.getItem("token") ?? "" }
+            });
             setContent(response.data.content);
-            
+            setFilteredContent(response.data.content);
         }
-        fetchData()
-    }, [modalOpen])
+        fetchData();
+    }, []);
+    
+    function onClickYT() {
+        setFilteredContent(content.filter(c => c.type === "Youtube"));
+    }
+    
+    function onClickTwt() {
+        setFilteredContent(content.filter(c => c.type === "Twitter"));
+    }
+    
+    async function deleteHandler(id: string) {
+        await axios.delete(`${HTTP_BACKEND}/contents/content/${id}`, {
+            headers: { Authorization: localStorage.getItem("token") ?? "" }
+        });
+        setContent(prev => prev.filter(c => c._id !== id));
+        setFilteredContent(prev => prev.filter(c => c._id !== id));
+    }
+    
 
-    async function deleteHandler(id : string){
-      await axios.delete(`${HTTP_BACKEND}/contents/content/${id}`, {
-            headers : {
-                Authorization : localStorage.getItem("token")
-            }
-        })
-        setContent((item)=> item.filter((c)=> c._id !== id))
-    }
-  
+   
     function modalHandler() {
-      setModalOpen(!modalOpen)
-    }
+        setModalOpen(!modalOpen)
+      }
 
     async function shareHandler(){
         const share = true
@@ -89,6 +97,8 @@ export function Dashboard(){
   
         {/* Sidebar */}
         <Sidebar
+          onclickTwt={onClickTwt}
+          onclickYT={onClickYT}
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
         />
@@ -120,7 +130,7 @@ export function Dashboard(){
           </div>
   
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-8 md:px-12 pb-8">
-            {content.map(({ _id, type, title, link }) => (
+            {filteredContent.map(({ _id, type, title, link }) => (
               <Card
                 key={_id}
                 title={title}

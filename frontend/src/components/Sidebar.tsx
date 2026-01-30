@@ -6,9 +6,13 @@ import { SideListComponent } from "./SIdeList";
 interface SidebarProps {
   isOpen: boolean;
   onClose?: () => void;
+  onclickYT? : () => void;
+  onclickTwt? : () => void
 }
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, onclickYT, onclickTwt }: SidebarProps) {
+
+
   return (
     <>
       {/* Backdrop (mobile only) */}
@@ -34,8 +38,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         <div className="py-20 md:py-0">
-          <SideListComponent icon={<YTicon />} text="Youtube" />
-          <SideListComponent icon={<TwTicon />} text="Twitter" />
+          <SideListComponent onClick={onclickYT} icon={<YTicon />} text="Youtube" />
+          <SideListComponent onClick={onclickTwt} icon={<TwTicon />} text="Twitter" />
         </div>
       </div>
     </>
