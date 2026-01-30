@@ -1,10 +1,8 @@
-import type { RefObject } from "react"
-
 interface inputProps {
     placeholder : string,
     onchange? : ()=> void,
     size : "sm" | "md",
-    reference : RefObject<HTMLInputElement>
+    reference : React.RefObject<HTMLInputElement | null>
 }
 
 const sizeStyles = {

@@ -11,13 +11,13 @@ interface authProps {
 }
 
 export function AuthPage({isSignin} : authProps){
-    const usernameRef = useRef<HTMLInputElement>()
-    const passwordRef = useRef<HTMLInputElement>()
+    const usernameRef = useRef<HTMLInputElement| null>(null)
+    const passwordRef = useRef<HTMLInputElement| null>(null)
     const navigate = useNavigate()
 
     async function sendCredentials (){
-        const username = usernameRef.current.value;
-        const password = passwordRef.current.value;
+        const username = usernameRef.current?.value;
+        const password = passwordRef.current?.value;
 
         if (!isSignin){
             const response = await axios.post(`${HTTP_BACKEND}/users/signup`, {

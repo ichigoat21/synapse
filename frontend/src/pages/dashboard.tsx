@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { MenuIcon } from "../icons/menuicon"
 import { MainIcon } from "../icons/brainly"
 import { Sidebar } from "../components/Sidebar"
@@ -7,10 +7,33 @@ import { ShareIcon } from "../icons/shareicon"
 import PlusIcon from "../icons/plusicon"
 import Card from "../components/Card"
 import { Modal } from "../components/modal"
+import axios from "axios"
+import { HTTP_BACKEND } from "../backendUrl/config"
+
+type Content = {
+    _id: string;
+    type: "Youtube" | "Twitter";
+    title: string;
+    link: string;
+  };
 
 export function Dashboard(){
     const [modalOpen, setModalOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [content, setContent] = useState<Content[]>([])
+
+    useEffect(()=> {
+        async function fetchData(){
+           const response =  await axios.get(`${HTTP_BACKEND}/contents/home`, {
+                headers : {
+                    Authorization : localStorage.getItem("token")
+                }
+            })
+            setContent(response.data.content);
+            
+        }
+        fetchData()
+    }, [modalOpen])
 
   
     function modalHandler() {
@@ -76,16 +99,14 @@ export function Dashboard(){
           </div>
   
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-8 md:px-12 pb-8">
-            <Card
-              title="first video"
-              link="https://youtu.be/FpOcxFBzCow"
-              type="Youtube"
-            />
-            <Card
-              title="first tweet"
-              link="https://x.com/thecinelost/status/2014173675457745136"
-              type="Twitter"
-            />
+            {content.map(({ _id, type, title, link }) => (
+              <Card
+                key={_id}
+                title={title}
+                link={link}
+                type={type}
+              />
+            )) }
           </div>
         </div>
   

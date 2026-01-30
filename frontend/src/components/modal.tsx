@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import CrossIcon from "../icons/cross"
 import { Button } from "./Button"
 import { Input } from "./Input"
@@ -14,13 +14,13 @@ interface modalProps {
 export function Modal({open, onClose} : modalProps){
 
 
-    const titleRef = useRef<HTMLInputElement>()
-    const linkRef = useRef<HTMLInputElement>()
+    const titleRef = useRef<HTMLInputElement>(null)
+    const linkRef = useRef<HTMLInputElement>(null)
     const [type, setType] = useState("Youtube")
 
     async function sendContent(){
-        const title = titleRef.current.value
-        const link = linkRef.currrent.value
+        const title = titleRef.current?.value
+        const link = linkRef.current?.value
 
          axios.post(`${HTTP_BACKEND}/contents/add`, {
             title,
