@@ -10,6 +10,8 @@ import { Modal } from "../components/modal"
 import axios from "axios"
 import { HTTP_BACKEND } from "../backendUrl/config"
 import { ShareModal } from "../components/shareModal"
+import { LightIcon } from "../icons/lightMode"
+import { DarkIcon } from "../icons/darkMode"
 
 type Content = {
     _id: string;
@@ -18,6 +20,7 @@ type Content = {
     link: string;
   };
 
+
 export function Dashboard(){
     const [modalOpen, setModalOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -25,6 +28,7 @@ export function Dashboard(){
     const [filteredContent, setFilteredContent] = useState<Content[]>([])
     const [shareModalOpen, setShareModalOpen] = useState(false)
     const [shareLink, setShareLink] = useState("")
+    const [lightMode, setLightMode] = useState(true)
 
     useEffect(() => {
         async function fetchData() {
@@ -107,6 +111,11 @@ export function Dashboard(){
         {/* Main content */}
         <div className="md:ml-64 lg:ml-92 pt-14 md:pt-0">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-8 md:p-12">
+            <div onClick={()=> {
+              setLightMode(!lightMode)
+            }}>
+              {lightMode === true ? <LightIcon/> : <DarkIcon/>}
+            </div>
             <div className="w-full flex justify-center">
              <p className="text-xl sm:text-2xl font-bold ">All Notes</p>
             </div>
