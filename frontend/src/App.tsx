@@ -3,12 +3,13 @@ import { SignIn } from "./pages/signin"
 import { SignUp } from "./pages/signup"
 import { Dashboard } from "./pages/dashboard"
 import { ShareBoard } from "./pages/share"
+import { LandingPage } from "./pages/landing"
 
 
 function App() {
   return <BrowserRouter>
             <Routes>
-              <Route path="/" element={<SignUp/>}></Route>
+              <Route path="/" element={<LandingPage/>}></Route>
               <Route path="/signup" element={<SignUp/>}></Route>
               <Route path="/signin" element={<SignIn/>}></Route>
               <Route path="/dashboard" element={<Dashboard/>}></Route>

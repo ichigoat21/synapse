@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Pinyon+Script&display=swap');
 @import "tailwindcss";
 
 
@@ -5,5 +6,6 @@
   --color-darkblue : #5245e6;
   --color-lightblue : #e0e9ff;
   --color-textblue : #7470cf;
-  --color-bgwhite : #f7fafc;
+  --color-bgwhite : #f7fafc;;
+  --font-display : "Manrope", sans-serif;
 }

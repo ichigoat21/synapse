@@ -31,6 +31,15 @@ export function Dashboard(){
     const [lightMode, setLightMode] = useState(true)
 
     useEffect(() => {
+      if (lightMode) {
+        document.documentElement.classList.remove("dark")
+      } else {
+        document.documentElement.classList.add("dark")
+      }
+    }, [lightMode])
+    
+
+    useEffect(() => {
         async function fetchData() {
             const response = await axios.get(`${HTTP_BACKEND}/contents/home`, {
                 headers: { Authorization: localStorage.getItem("token") ?? "" }
@@ -75,7 +84,7 @@ export function Dashboard(){
     }
   
     return (
-      <div className="min-h-screen bg-bgwhite">
+      <div className="min-h-screen bg-bgwhite dark:bg-neutral-900">
         {/*  Mobile top bar */}
         <div className="md:hidden fixed top-0 left-0 right-0 h-14 
     bg-white/80 backdrop-blur-md
