@@ -31,8 +31,18 @@ export function LandingPage() {
             </p>
           </div>
           <div className="flex justify-center items-center gap-6 mt-20">
-            <Button variant="secondary" text="Sign Up" size="md"/>
-            <Button variant="secondary" text="Log In" size="md"/>
+            <Button 
+            variant="secondary" 
+            text="Sign Up" 
+            size="md"
+            onclick={() => navigate("/signup")}
+            />
+            <Button 
+            variant="secondary" 
+            text="Log In" 
+            size="md"
+            onclick={() => navigate("/signin")}
+            />
           </div>
         </main>
   
