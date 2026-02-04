@@ -30,6 +30,10 @@ export function LandingPage() {
               Your highlights from the Internet
             </p>
           </div>
+          <div className="flex justify-center items-center gap-6 mt-20">
+            <Button variant="secondary" text="Sign Up" size="md"/>
+            <Button variant="secondary" text="Log In" size="md"/>
+          </div>
         </main>
   
         <footer className="w-full bg-black py-6 flex items-center justify-center">
