@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { LogoImg } from "../logo/logo"
+import { GitIcon } from "../icons/github"
+import { TwTicon } from "../icons/twitter"
 
 export function LandingPage() {
     const navigate = useNavigate()
@@ -32,7 +34,7 @@ export function LandingPage() {
           </div>
           <div className="flex justify-center items-center gap-6 mt-20">
             <Button 
-            variant="secondary" 
+            variant="primary" 
             text="Sign Up" 
             size="md"
             onclick={() => navigate("/signup")}
@@ -46,8 +48,15 @@ export function LandingPage() {
           </div>
         </main>
   
-        <footer className="w-full bg-black py-6 flex items-center justify-center">
-          <p className="text-white text-sm">Developed by shiv</p>
+        <footer className="w-full bg-black  py-4 md:py-6 px-2 md:px-20 flex items-center justify-between">
+          <div className="flex  items-center md:px-4">
+          <p className="text-white text-xs">© 2026 Synapse. </p>
+          </div>
+          <p className="text-white text-xs">Developed by shiv</p>
+          <div className="flex gap-2 items-center">
+              <a href="https://github.com/ichigoat21/synapse" target="_blank"><GitIcon/></a>
+              <a href="https://x.com/codegazer" target="_blank"><TwTicon/></a>
+          </div>
         </footer>
       </div>
     )
