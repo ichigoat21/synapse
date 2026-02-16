@@ -10,8 +10,7 @@ import { Modal } from "../components/modal"
 import axios from "axios"
 import { HTTP_BACKEND } from "../backendUrl/config"
 import { ShareModal } from "../components/shareModal"
-import { LightIcon } from "../icons/lightMode"
-import { DarkIcon } from "../icons/darkMode"
+
 
 type Content = {
     _id: string;
@@ -28,15 +27,9 @@ export function Dashboard(){
     const [filteredContent, setFilteredContent] = useState<Content[]>([])
     const [shareModalOpen, setShareModalOpen] = useState(false)
     const [shareLink, setShareLink] = useState("")
-    const [lightMode, setLightMode] = useState(true)
+    
 
-    useEffect(() => {
-      if (lightMode) {
-        document.documentElement.classList.remove("dark")
-      } else {
-        document.documentElement.classList.add("dark")
-      }
-    }, [lightMode])
+    
     
 
     useEffect(() => {
@@ -84,8 +77,8 @@ export function Dashboard(){
     }
   
     return (
-      <div className="min-h-screen bg-bgwhite dark:bg-neutral-900">
-        {/*  Mobile top bar */}
+      <div className="min-h-screen bg-bgwhite ">
+       
         <div className="md:hidden fixed top-0 left-0 right-0 h-14 
     bg-white/80 backdrop-blur-md
     border-b border-gray-200/60
@@ -105,7 +98,6 @@ export function Dashboard(){
       </p>
     </div>
   
-    {/* Spacer to balance layout */}
     <div className="w-9" />
   </div>
   
@@ -120,11 +112,6 @@ export function Dashboard(){
         {/* Main content */}
         <div className="md:ml-64 lg:ml-92 pt-14 md:pt-0">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-8 md:p-12">
-            <div onClick={()=> {
-              setLightMode(!lightMode)
-            }}>
-              {lightMode === true ? <LightIcon/> : <DarkIcon/>}
-            </div>
             <div className="w-full flex justify-center">
              <p className="text-xl sm:text-2xl font-bold ">All Notes</p>
             </div>
