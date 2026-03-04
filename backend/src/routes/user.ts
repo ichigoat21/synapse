@@ -7,8 +7,8 @@ import { userModel } from "../schema/user";
 
 
 const User = z.object({
-    username : z.string().max(10).min(3),
-    password : z.string().max(20).min(8)
+    username : z.string().max(20).min(3),
+    password : z.string().max(20).min(5)
 })
 
 const userRouter = Router()
