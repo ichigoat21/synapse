@@ -1,17 +1,27 @@
 import type { ReactElement } from "react"
 
-
-interface listProps{
-    icon : ReactElement,
-    text : string,
-    onClick? : ()=> void
+interface listProps {
+    icon: ReactElement
+    text: string
+    onClick?: () => void
+    active?: boolean
 }
 
-export function SideListComponent({icon, text, onClick} : listProps){
-    return <div onClick={onClick} className="px-6 lg:px-12 py-2 lg:py-3 my-2 lg:my-3 w-11/12 lg:w-4/5 mx-4 lg:mx-10 bg-gray-100 hover:bg-gray-200 rounded-md overflow-hidden flex items-center justify-start gap-2">
-        <div className="scale-90 lg:scale-100">
-            {icon}
+export function SideListComponent({ icon, text, onClick, active }: listProps) {
+    return (
+        <div
+            onClick={onClick}
+            className={`
+                flex items-center gap-3 px-4 py-2.5 rounded-full cursor-pointer
+                transition-all text-sm font-medium
+                ${active
+                    ? "bg-[#1a1a1a] text-[#f8f8f6]"
+                    : "text-[#555] hover:bg-[#efefed] hover:text-[#1a1a1a]"
+                }
+            `}
+        >
+            <span className="w-4 h-4 flex items-center justify-center shrink-0">{icon}</span>
+            <span>{text}</span>
         </div>
-        <p className="text-sm lg:text-base">{text}</p>
-    </div>
+    )
 }
