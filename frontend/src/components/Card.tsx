@@ -34,15 +34,17 @@ export default function Card({ title, link, type, onDelete }: CardProps) {
                     <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${type === "Youtube" ? "bg-red-400" : "bg-sky-400"}`} />
                     <p className="text-sm font-medium text-[#1a1a1a] truncate">{title}</p>
                 </div>
-                <button
-                    onClick={onDelete}
-                    className="p-1.5 rounded-full hover:bg-[#f5f5f0] transition-colors shrink-0 ml-2"
-                    aria-label="Delete"
-                >
-                    <span className="w-3.5 h-3.5 text-[#bbb] hover:text-red-400 transition-colors block">
-                        <DeleteIcon />
-                    </span>
-                </button>
+                {onDelete && (
+                    <button
+                        onClick={onDelete}
+                        className="p-1.5 rounded-full hover:bg-[#f5f5f0] transition-colors shrink-0 ml-2"
+                        aria-label="Delete"
+                    >
+                        <span className="w-3.5 h-3.5 text-[#bbb] hover:text-red-400 transition-colors block">
+                            <DeleteIcon />
+                        </span>
+                    </button>
+                )}
             </div>
 
             {/* Embed */}
