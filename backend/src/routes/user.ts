@@ -31,7 +31,7 @@ userRouter.post("/signup", async (req, res)=> {
         username : username,
         password : hashedPassword
     })
-    res.status(200).json({
+    return res.status(200).json({
         message : 'You are signed up',
         userid : userDB._id
     }) } catch (err) {
@@ -67,17 +67,17 @@ userRouter.post("/signin", async (req, res)=> {
         }, JWT_SECRET )
 
         if (token){
-            res.status(200).json({
+            return res.status(200).json({
                 message : 'You are signed in',
                 token : token
             })
         } else {
-            res.status(403).json({
+            return res.status(403).json({
                 message : 'Sorry couldnt assign you a token'
             })
         }
     } catch {
-        res.status(500).json({
+        return res.status(500).json({
             message : 'Sorry Something went wrong'
         })
     }
